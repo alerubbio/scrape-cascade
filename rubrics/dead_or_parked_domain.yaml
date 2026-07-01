@@ -1,0 +1,42 @@
+# Is this domain a live business site, or a parked / expired / placeholder page? A cheap
+# first-pass filter to drop dead domains before spending real work on a list. The positive
+# phrases are deliberately specific so a single strong hit is trustworthy.
+name: dead_or_parked_domain
+description: >
+  Classify whether a domain is parked, expired, for-sale, or an empty placeholder
+  (positive = parked_or_dead) versus a live site with real content (negative = live_site).
+positive_label: parked_or_dead
+negative_label: live_site
+confident_threshold: 0.6
+min_net_hits: 1   # a single unambiguous parking phrase is decisive; the judge arbitrates the rest
+positive:
+  - domain is for sale
+  - buy this domain
+  - this domain is parked
+  - parked domain
+  - domain for sale
+  - under construction
+  - coming soon
+  - account suspended
+  - default web page
+  - website is temporarily unavailable
+  - hugedomains
+  - sedo
+  - godaddy parking
+  - namecheap parking
+negative:
+  - about us
+  - products
+  - services
+  - contact
+  - pricing
+  - careers
+  - blog
+  - login
+  - privacy policy
+  - terms of service
+judge_instructions: >
+  Label parked_or_dead when the page is a registrar/parking placeholder, a "domain for
+  sale" lander, an "under construction"/"coming soon" stub, a server default page, or is
+  effectively empty. Label live_site when there is genuine business content (products,
+  services, company info, navigation). Use unknown only if the text is truly ambiguous.

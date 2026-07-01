@@ -1,0 +1,22 @@
+.venv/
+.venv*/
+data/
+*.db
+*.csv
+*.jsonl
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
+
+# build / packaging / tooling
+build/
+dist/
+*.egg-info/
+.eggs/
+.pytest_cache/
+.ruff_cache/
+
+# OS
+.DS_Store

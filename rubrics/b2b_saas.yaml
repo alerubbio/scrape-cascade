@@ -1,0 +1,52 @@
+# Replicates the original experiment: sort real B2B SaaS from services shops,
+# consumer apps, and dead pages. Keyword lists only need to catch the OBVIOUS
+# cases cheaply -- everything genuinely ambiguous falls through to the judge.
+name: b2b_saas
+description: >
+  Classify whether a domain is primarily a B2B SaaS company (sells subscription
+  software to other businesses), as opposed to a services/consulting shop, an
+  agency, a consumer app/retailer, or a parked/dead page.
+positive_label: b2b_saas
+negative_label: not_saas
+confident_threshold: 0.6
+min_net_hits: 2   # need >=2 net keyword hits to trust the cheap pass; thinner -> judge
+positive:
+  - platform
+  - software
+  - api
+  - integrations
+  - dashboard
+  - free trial
+  - start free
+  - book a demo
+  - request a demo
+  - pricing
+  - per seat
+  - per user
+  - per month
+  - sso
+  - soc 2
+  - onboarding
+  - automation
+  - workflow
+  - changelog
+negative:
+  - consulting
+  - agency
+  - our services
+  - case studies
+  - portfolio
+  - restaurant
+  - menu
+  - shop now
+  - add to cart
+  - book an appointment
+  - law firm
+  - dentist
+  - clinic
+  - real estate
+  - for sale
+judge_instructions: >
+  Decide if this company is primarily a B2B SaaS business -- it sells subscription
+  software to other businesses. Treat services/consulting shops, agencies, consumer
+  apps/retail, and parked or dead pages as not_saas.

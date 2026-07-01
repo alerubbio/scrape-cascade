@@ -1,0 +1,48 @@
+# Is this domain primarily an online store? Sorts real storefronts from B2B software,
+# services/agency shops, media/content sites, and dead pages. Keyword lists only need to
+# catch the OBVIOUS cases cheaply -- everything ambiguous falls through to the judge.
+name: ecommerce_store
+description: >
+  Classify whether a domain is primarily an ecommerce store that sells physical or digital
+  goods directly to shoppers, as opposed to B2B software, a services/agency shop, a
+  media/content site, or a parked/dead page.
+positive_label: ecommerce_store
+negative_label: not_ecommerce
+confident_threshold: 0.6
+min_net_hits: 2
+positive:
+  - add to cart
+  - add to bag
+  - shopping cart
+  - checkout
+  - free shipping
+  - shop now
+  - buy now
+  - in stock
+  - out of stock
+  - size guide
+  - returns policy
+  - my account
+  - wishlist
+  - shopify
+  - woocommerce
+  - magento
+  - bigcommerce
+negative:
+  - book a demo
+  - request a demo
+  - free trial
+  - per seat
+  - per user
+  - sdk
+  - documentation
+  - consulting
+  - our services
+  - white paper
+  - case studies
+  - law firm
+judge_instructions: >
+  Decide if this site's primary purpose is selling goods to shoppers online -- a real
+  storefront with products, a cart, and checkout. Treat B2B SaaS, services/agencies,
+  media/blogs, and parked or dead pages as not_ecommerce. A company that only mentions
+  "customers" or "pricing" for software is not_ecommerce.

@@ -1,0 +1,122 @@
+# Does this company show active hiring / growth signals? A homepage read plus an
+# optional light crawl of careers/news paths that flags open roles, an ATS-hosted jobs
+# board, recent funding, and expansion language. Keyword lists only need to catch the
+# OBVIOUS cases cheaply -- everything genuinely ambiguous falls through to the judge.
+name: hiring_signal
+description: >
+  Classify whether a company's website shows credible signs of active hiring or growth:
+  open roles or an ATS-hosted jobs board, recent funding or investment, or clear
+  expansion language. Homepage-level signal plus an optional light careers/news crawl.
+positive_label: hiring_signal
+negative_label: no_hiring_signal
+confident_threshold: 0.65
+min_net_hits: 2   # need >=2 net keyword hits to trust the cheap pass; thinner -> judge
+positive:
+  - careers
+  - jobs
+  - open roles
+  - open positions
+  - we're hiring
+  - hiring
+  - now hiring
+  - join our team
+  - growth
+  - expanding
+  - expansion
+  - raised
+  - funding
+  - financing
+  - investment
+  - series a
+  - series b
+  - series c
+  - venture
+negative:
+  - restaurant
+  - menu
+  - add to cart
+  - wedding
+  - photography
+  - real estate listing
+  - for sale by owner
+  - law firm
+  - dental
+  - portfolio
+  - our services
+  - consulting
+  - agency
+  - charity
+  - nonprofit
+crawl_paths:
+  - page_type: careers
+    # A few cheap confirm-probes plus one deep subpage that recovers careers boards
+    # mounted on a subpath. Real discovery (homepage anchors, ATS-API slug, sitemap)
+    # does the heavy lifting; these stay as low-cost fallbacks.
+    paths:
+      - /careers
+      - /careers/
+      - /jobs
+      - /careers/overview
+      - /company/careers
+      - /about/careers
+  - page_type: company
+    paths:
+      - /about
+      - /about-us
+      - /company
+      - /team
+  - page_type: news
+    paths:
+      - /news
+      - /press
+      - /press-releases
+      - /media
+      - /blog
+page_evidence_terms:
+  careers:
+    - open roles
+    - open positions
+    - current openings
+    - current job openings
+    - job openings
+    - job listing
+    - job listings
+    - vacancies
+    - apply
+    - greenhouse
+    - lever
+    - workday
+    - ashby
+    - jobvite
+    - bamboohr
+    - smartrecruiters
+    - rippling
+    - full-time
+    - full time
+    - part-time
+    - part time
+    - employment type
+    - recruit
+  company:
+    - growth
+    - expanding
+    - employees
+    - global team
+    - customers
+    - enterprise
+  news:
+    - raised
+    - funding
+    - financing
+    - investment
+    - series a
+    - series b
+    - series c
+    - series d
+    - growth equity
+judge_instructions: >
+  Label hiring_signal only when the text gives concrete evidence of active hiring or
+  growth: open roles or an official careers/ATS jobs board, recent funding or investment,
+  or clear expansion/scaling language. Do not infer hiring from generic product marketing
+  alone. Use no_hiring_signal for consumer, local-service, agency, portfolio, charity, or
+  otherwise generic pages. Use unknown for empty, parked, placeholder, or thin text.

@@ -1,0 +1,28 @@
+# --- Tier 1 (fast pass) + judge: the minimal free core ---
+httpx[http2]>=0.24
+html2text>=2020.1.16
+pyyaml>=6.0
+# browser-TLS-impersonating fetch fallback for TLS-fingerprint gates; needs Python >=3.10
+# (optional — the fetch tier falls back to httpx-only if absent)
+curl_cffi>=0.7; python_version >= "3.10"
+
+# --- Tier 1 structured-parse helpers (fallback / future extraction) ---
+beautifulsoup4>=4.11
+lxml>=4.9
+
+# --- Tier 2/3 (browser rescue): heavier; only needed with --rescue / --stealth ---
+# After installing, run: .venv/bin/playwright install chromium      (Tier 2 Chromium)
+#                  and:  .venv/bin/python -m camoufox fetch          (Tier 3 stealth Firefox)
+playwright>=1.40
+# Tier 3 stealth: Camoufox ships its OWN Firefox -> launches in managed environments that
+# block Chrome's remote-debugging (CDP) port, and clears Cloudflare Turnstile with no
+# external solver. Preferred Tier 3.
+camoufox>=0.4
+# LEGACY Tier-3 fallback only: undetected-chromedriver is Chrome-version-sensitive and is
+# broken on Python 3.12 (it imports the removed `distutils`). fetch_stealth falls back to it
+# but camoufox is the working tier; run `--doctor` to see live status on this machine.
+selenium>=4.10
+undetected-chromedriver>=3.5
+
+# --- optional analysis convenience ---
+pandas>=2.0
