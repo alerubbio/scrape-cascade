@@ -22,7 +22,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "scripts"))
 import cascade
 
 
-BAD_HOST = "sermon%20index=0%20key=url"  # the exact string from the crash report
+BAD_HOST = "sermon%20index=0%20key=url"  # a real-world malformed host that broke naive parsing
 BAD_URL = "https://" + BAD_HOST + "/jobs"
 
 

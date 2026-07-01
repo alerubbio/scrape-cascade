@@ -1,4 +1,4 @@
-# Replicates the original experiment: sort real B2B SaaS from services shops,
+# Sorts real B2B SaaS from services shops,
 # consumer apps, and dead pages. Keyword lists only need to catch the OBVIOUS
 # cases cheaply -- everything genuinely ambiguous falls through to the judge.
 name: b2b_saas

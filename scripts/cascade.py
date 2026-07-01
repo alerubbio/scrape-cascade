@@ -84,7 +84,7 @@ ATS_HOST_HINTS = (
     "paylocity.com",
     "saashr.com",
     "ultipro.com",
-    # 2026-06-04 careers-discovery research: corpus-confirmed ATS hosts silently missed before.
+    # Additional ATS hosts that bare-domain probing silently misses.
     "careers.hibob.com",
     "careerpuck.com",
     "hire.trakstar.com",
@@ -952,7 +952,7 @@ def _embedded_ats_links_from_html(html, soup=None):
 
 
 # --------------------------------------------------------------------------- #
-# net-new discovery methods (2026-06-04 careers-discovery research)            #
+# net-new discovery methods                                                   #
 # HTML-independent / zero-or-low-cost routes that recover SPA / blocked /      #
 # hidden careers boards the homepage-anchor + path-guess tiers miss. Each      #
 # takes a ``fetch(url) -> text|None`` callable so it is decoupled + testable.  #
