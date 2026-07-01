@@ -17,14 +17,14 @@ these; the rest are on you when you write a rubric or extend a tier.
 - **SPA / JS-only content.** httpx sees an empty shell for client-rendered sites.
   That is exactly what Tier 2 (Playwright) rescues. If Tier 2 still returns a shell,
   the content is behind interaction (login, click) -- out of scope for bulk classify.
-- **Single-IP anti-bot reality.** We dropped Firecrawl's managed proxy rotation. At
-  scale, scraping from one IP will draw rate-limits and blocks Firecrawl would have
-  absorbed. The mitigations: the tiered-fingerprint cascade (httpx -> Playwright ->
-  undetected-chromedriver, each a different signature), polite concurrency, and
-  backoff. It is the $0 trade-off -- expect a higher drop rate than a paid proxy.
+- **Single-IP anti-bot reality.** With no managed proxy-rotation service, scraping
+  from one IP will draw rate-limits and blocks at scale. The mitigations: the
+  tiered-fingerprint cascade (httpx -> Jina Reader -> Playwright -> Camoufox, each a
+  different signature), polite concurrency, backoff, and optional env-gated proxy
+  routing. It is the $0 trade-off -- expect a higher drop rate than a paid proxy.
 - **401 / 403 walls.** Some hosts hard-block non-browser fingerprints. Tier 3
-  (undetected-chromedriver) is the last resort; if it also fails, record the domain
-  as `unreachable` rather than guessing.
+  (Camoufox, a hardened Firefox that clears Cloudflare) is the last resort; if it
+  also fails, record the domain as `unreachable` rather than guessing.
 - **Cache the superset, slice per rubric.** Page text is cached rubric-agnostically
   in SQLite. Re-running a *different* rubric over the same list reuses fetched text
   and only re-runs scoring + judge -- no re-scrape. Use `--refetch` to force.
